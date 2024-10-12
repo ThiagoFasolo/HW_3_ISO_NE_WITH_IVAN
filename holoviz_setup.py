@@ -11,6 +11,6 @@ def create_table(data):
                      fill_color="lightgrey",
                      align='left'))
     ])
-    fig.show()
+    figure.show()
 
 create_table(<insert_data>)
