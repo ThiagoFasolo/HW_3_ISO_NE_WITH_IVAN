@@ -13,4 +13,5 @@ def create_table(data):
     ])
     figure.show()
 
-create_table(<insert_data>)
+run = create_table(<insert_data>)
+run
