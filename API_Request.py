@@ -33,7 +33,7 @@ def request_ISO(application = 'genfuelmix/current'):
     else:
         print('Failed to retrieve data:', response.status_code, f'from {url}')
 
-def request_ISO_genfuelmix_day(date):
+def request_ISO_genfuelmix_day(date = datetime.now().strftime('%Y%m%d')):
     '''
     input a date in format YYYYMMDD
     return a dataframe of Genfuelmix data for that date
@@ -44,7 +44,7 @@ def request_ISO_genfuelmix_day(date):
     df = json_normalize(data['GenFuelMixes']['GenFuelMix'])
     df['BeginDate'] = pd.to_datetime(df['BeginDate'])
     return df
-def request_ISO_genfuelmix_daterange(beg_date, end_date):
+def request_ISO_genfuelmix_daterange(beg_date = 20240101, end_date = datetime.now().strftime('%Y%m%d')):
     '''
     :param beg_date: in format YYYYMMDD
     :param end_date: in format YYYYMMDD
