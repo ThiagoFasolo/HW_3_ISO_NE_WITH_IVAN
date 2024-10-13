@@ -1,5 +1,8 @@
 import plotly.graph_objects as go
 
+
+
+
 def create_table(data):
     # Creates table using the data
     figure = go.Figure(data=[go.Table(
@@ -13,4 +16,4 @@ def create_table(data):
     ])
     figure.show()
 
-create_table(<insert_data>)
+create_table()
