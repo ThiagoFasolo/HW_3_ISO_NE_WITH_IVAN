@@ -44,7 +44,7 @@ def request_ISO_genfuelmix_day(date = datetime.now().strftime('%Y%m%d')):
     df = json_normalize(data['GenFuelMixes']['GenFuelMix'])
     df['BeginDate'] = pd.to_datetime(df['BeginDate'])
     return df
-def request_ISO_genfuelmix_daterange(beg_date = 20240101, end_date = datetime.now().strftime('%Y%m%d')):
+def request_ISO_genfuelmix_daterange(beg_date = 20241001, end_date = datetime.now().strftime('%Y%m%d')):
     '''
     :param beg_date: in format YYYYMMDD
     :param end_date: in format YYYYMMDD
