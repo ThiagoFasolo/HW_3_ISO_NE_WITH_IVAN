@@ -18,6 +18,8 @@ date_range_widget = pn.widgets.DateRangePicker(
     value=(datetime.date(2023, 1, 1), datetime.date(2023, 12, 31))  # Default range
 )
 
+
+
 # Plot size adjustment sliders
 width_slider = pn.widgets.IntSlider(name="Plot Width", start=300, end=2000, step=100, value=1200)
 height_slider = pn.widgets.IntSlider(name="Plot Height", start=300, end=1500, step=100, value=800)
