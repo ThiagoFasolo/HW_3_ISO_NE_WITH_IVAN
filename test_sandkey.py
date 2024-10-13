@@ -34,4 +34,10 @@ else:
 
 df = json_normalize(data['GenFuelMixes']['GenFuelMix'])
 
-sandkey.make_sankey(df,columns=['FuelCategoryRollup','GenMw','FuelCategory'],vals_col='GenMw')
+col2 = 'FuelCategoryRollup'
+col1 = 'FuelCategory'
+word = 'NonRenewable'
+
+df[col2] = df.apply(lambda row: word if row[col1] == row[col2] else row[col2], axis=1)
+
+sandkey.make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col='GenMw')
