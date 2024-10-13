@@ -1,4 +1,4 @@
-from API_Request import request_ISO_genfuelmix_daterange
+from ISO_API_Request import request_ISO_genfuelmix_daterange
 import panel as pn  # Import Panel for UI components
 
 def get_energy_data(energy_source, date_range):
