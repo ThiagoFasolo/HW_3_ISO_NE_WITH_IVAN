@@ -32,6 +32,10 @@ def update_dashboard(table_category, sankey_category, node_width, node_pad):
     # Filter data for the Sankey diagram
     filtered_sankey_data = test_sandkey.df[test_sandkey.df['FuelCategoryRollup'] == sankey_category]
 
+    # Handle empty data
+    if filtered_table_data.empty or filtered_sankey_data.empty:
+        return pn.pane.Markdown("### No Data Available for the Selected Category", width=800)
+
     # Create table figure
     table_fig = create_table(filtered_table_data)
 

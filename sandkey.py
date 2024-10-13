@@ -84,6 +84,6 @@ def make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col=Non
     # Create Sankey diagram
     sk = go.Sankey(link=link, node=node)
     fig = go.Figure(sk)
-    fig.show()
+    return fig
 
 
