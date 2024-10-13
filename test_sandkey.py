@@ -4,6 +4,8 @@ import json
 import xml.etree.ElementTree as ET
 from pandas import json_normalize
 import sandkey
+import Basic_Table
+from Basic_Table import create_table
 
 username = 'sapozhnikov.i@northeastern.edu'
 password = 'Shark3Gum'
@@ -39,5 +41,6 @@ col1 = 'FuelCategory'
 word = 'NonRenewable'
 
 df[col2] = df.apply(lambda row: word if row[col1] == row[col2] else row[col2], axis=1)
+create_table(df)
 
 sandkey.make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col='GenMw')
