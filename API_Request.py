@@ -42,6 +42,7 @@ def request_ISO_genfuelmix_day(date):
     data = request_ISO(application=f'genfuelmix/day/{date}')
     # Return Dataframe instead of JSON
     df = json_normalize(data['GenFuelMixes']['GenFuelMix'])
+    df['BeginDate'] = pd.to_datetime(df['BeginDate'])
     return df
 def request_ISO_genfuelmix_daterange(beg_date, end_date):
     '''
