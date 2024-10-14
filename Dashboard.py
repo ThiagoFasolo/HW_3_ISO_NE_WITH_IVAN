@@ -21,7 +21,6 @@ layout = pn.template.FastListTemplate(
     main=[
         pn.Tabs(
             ("Energy Data Table", data_table),
-            # ("Energy Production Plot", energy_plot),
             ("Energy Line Graph", line_graph),  # New tab for the line graph
             ("Energy Sankey Diagram", sankey_diagram)  # New tab for the Sankey diagram
         ),

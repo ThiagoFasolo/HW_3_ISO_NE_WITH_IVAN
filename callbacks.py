@@ -21,14 +21,6 @@ def get_energy_data(df, energy_source):
     # Return the filtered data as a Panel DataFrame component
     return pn.pane.DataFrame(filtered_df, width=800)
 
-def get_energy_plot(df, category_type, plot_width, plot_height):
-
-    # Generate a Plotly bar plot
-    line_graph(df, category_type= category_type)
-
-    # Return the Plotly figure wrapped in a Panel object for rendering
-    return pn.pane.Plotly(fig, width=plot_width, height=plot_height)
-
 def get_line_graph(df, category_type, plot_width, plot_height):
     # Generate the line plot
     fig = line_graph(df, category_type = category_type, width = plot_width, height = plot_height)
