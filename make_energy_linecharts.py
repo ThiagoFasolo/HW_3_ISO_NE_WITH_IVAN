@@ -2,6 +2,7 @@ import pandas as pd
 import ISO_API_Request as isoapi
 import plotly.express as px
 from datetime import datetime
+
 def line_graph(df, category_type='FuelCategory'):
     """
     Parameters:
