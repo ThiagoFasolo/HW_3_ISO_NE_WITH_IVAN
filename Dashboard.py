@@ -1,14 +1,15 @@
 import panel as pn
-from widgets import energy_source_widget, date_range_widget, width_slider, height_slider, category_type_widget  # Import new widget
-from callbacks import get_energy_data, get_energy_plot, get_line_graph, get_sankey_diagram  # Assuming you created these callbacks
+from widgets import energy_source_widget, date_range_widget, width_slider, height_slider, category_type_widget
+from callbacks import get_energy_data, get_energy_plot, get_line_graph, get_sankey_diagram, fetch_data
 
-pn.extension()
+# Reactive DataFrame bound to widgets
+main_data_frame = pn.bind(fetch_data, date_range_widget)
 
 # Bind widgets to callback functions
-data_table = pn.bind(get_energy_data, energy_source_widget, date_range_widget)
-energy_plot = pn.bind(get_energy_plot, energy_source_widget, date_range_widget, width_slider, height_slider)
-line_graph = pn.bind(get_line_graph, energy_source_widget, date_range_widget, category_type_widget)  # Pass category type widget
-sankey_diagram = pn.bind(get_sankey_diagram, date_range_widget, category_type_widget)  # Pass category type widget
+data_table = pn.bind(get_energy_data, main_data_frame, energy_source_widget)
+# energy_plot = pn.bind(get_energy_plot, main_data_frame, category_type_widget, width_slider, height_slider)
+line_graph = pn.bind(get_line_graph, main_data_frame, category_type_widget, width_slider, height_slider)
+sankey_diagram = pn.bind(get_sankey_diagram, main_data_frame)
 
 # Define the layout with widgets and the main display components
 layout = pn.template.FastListTemplate(
@@ -20,7 +21,7 @@ layout = pn.template.FastListTemplate(
     main=[
         pn.Tabs(
             ("Energy Data Table", data_table),
-            ("Energy Production Plot", energy_plot),
+            # ("Energy Production Plot", energy_plot),
             ("Energy Line Graph", line_graph),  # New tab for the line graph
             ("Energy Sankey Diagram", sankey_diagram)  # New tab for the Sankey diagram
         ),

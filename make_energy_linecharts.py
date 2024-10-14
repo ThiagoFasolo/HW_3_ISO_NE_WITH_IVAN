@@ -3,7 +3,7 @@ import ISO_API_Request as isoapi
 import plotly.express as px
 from datetime import datetime
 
-def line_graph(df, category_type='FuelCategory'):
+def line_graph(df, category_type='FuelCategory', width = 500, height =800):
     """
     Parameters:
     - df: A DataFrame containing columns 'BeginDate', 'GenMw', and fuel category columns.
@@ -21,7 +21,9 @@ def line_graph(df, category_type='FuelCategory'):
         xaxis_title='Day/Time',
         yaxis_title='Generation (MW)',
         legend_title=category_type,
-        hovermode='x unified'
+        hovermode='x unified',
+        width=width,
+        height=height
     )
 
     return fig
