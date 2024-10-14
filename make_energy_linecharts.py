@@ -24,8 +24,8 @@ def line_graph(df, category_type='FuelCategory'):
         hovermode='x unified'
     )
 
-    # Show the figure
-    fig.show()
+    return fig
+
 def plot_total_energy(beg_date = 20240101, end_date = datetime.now().strftime('%Y%m%d'), category_type = 'FuelCategory'):
     '''
     :param beg_date: Start Date of Graph in YYYYMMDD format
@@ -34,4 +34,9 @@ def plot_total_energy(beg_date = 20240101, end_date = datetime.now().strftime('%
     :return: the specified line graph
     '''
     df = isoapi.request_ISO_genfuelmix_daterange(beg_date, end_date)
-    line_graph(df, category_type)
+    fig = line_graph(df, category_type)
+
+    return fig
+
+a = plot_total_energy(beg_date = 20241010, end_date=20241013)
+a.show()
