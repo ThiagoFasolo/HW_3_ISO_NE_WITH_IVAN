@@ -37,6 +37,3 @@ def plot_total_energy(beg_date = 20240101, end_date = datetime.now().strftime('%
     fig = line_graph(df, category_type)
 
     return fig
-
-a = plot_total_energy(beg_date = 20241010, end_date=20241013)
-a.show()
