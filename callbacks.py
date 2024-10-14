@@ -1,5 +1,7 @@
 from ISO_API_Request import request_ISO_genfuelmix_daterange
+import plotly.express as px
 import panel as pn  # Import Panel for UI components
+from datetime import datetime
 
 def get_energy_data(energy_source, date_range):
     # Extract start and end dates from the date range widget
@@ -18,6 +20,7 @@ def get_energy_data(energy_source, date_range):
     # Return the filtered data as a Panel DataFrame component
     return pn.pane.DataFrame(filtered_df, width=800)
 
+
 def get_energy_plot(energy_source, date_range, plot_width, plot_height):
     # Extract and format start and end dates
     start_date, end_date = date_range
@@ -28,9 +31,20 @@ def get_energy_plot(energy_source, date_range, plot_width, plot_height):
     df = request_ISO_genfuelmix_daterange(beg_date=start_date, end_date=end_date)
     filtered_df = df[df['FuelCategory'] == energy_source]
 
-    # Generate a plot (for example, a bar plot using Plotly or Matplotlib)
-    fig = filtered_df.plot(kind='bar', x='FuelCategory', y='GenMw', figsize=(plot_width, plot_height))
+    # Generate a Plotly bar plot
+    fig = px.bar(
+        filtered_df,
+        x='FuelCategory',
+        y='GenMw',
+        title=f"Energy Production for {energy_source}",
+        labels={'GenMw': 'Generated MW', 'FuelCategory': 'Fuel Category'},
+        width=plot_width,  # Set the width of the plot
+        height=plot_height  # Set the height of the plot
+    )
 
-    return pn.pane.Matplotlib(fig, width=plot_width, height=plot_height)
+    # Return the Plotly figure wrapped in a Panel object for rendering
+    return pn.pane.Plotly(fig, width=plot_width, height=plot_height)
+
+
 
 

@@ -1,21 +1,19 @@
-# widgets.py
-
 import panel as pn
 import datetime
 
 # Define the energy source widget
 energy_source_widget = pn.widgets.Select(
     name="Energy Source",
-    options=['Solar', 'Wind', 'Hydro', 'Gas'],
+    options=['Solar', 'Wind', 'Hydro', 'Natural Gas'],
     value='Solar'
 )
 
 # Date range widget for selecting a date range
 date_range_widget = pn.widgets.DateRangePicker(
     name="Select Date Range",
-    start=datetime.date(2022, 1, 1),  # Start date
+    start=datetime.date(2024, 9, 1),  # Start date
     end=datetime.date.today(),  # Today's date
-    value=(datetime.date(2023, 1, 1), datetime.date(2023, 12, 31))  # Default range
+    value=(datetime.date(2024, 9, 1), datetime.date.today(),)  # Default range
 )
 
 

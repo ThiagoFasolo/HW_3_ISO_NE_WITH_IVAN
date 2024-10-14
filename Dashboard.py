@@ -5,8 +5,8 @@ from callbacks import get_energy_data, get_energy_plot
 pn.extension()
 
 # Bind widgets to callback functions
-data_table = pn.bind(get_energy_data, energy_source_widget, date_range_widget.value)
-energy_plot = pn.bind(get_energy_plot, energy_source_widget, date_range_widget.value, width_slider, height_slider)
+data_table = pn.bind(get_energy_data, energy_source_widget, date_range_widget)
+energy_plot = pn.bind(get_energy_plot, energy_source_widget, date_range_widget, width_slider, height_slider)
 
 # Define the layout with widgets and the main display components
 layout = pn.template.FastListTemplate(
