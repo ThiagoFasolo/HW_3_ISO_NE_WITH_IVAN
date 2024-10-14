@@ -5,14 +5,14 @@ from datetime import datetime
 
 def get_energy_data(energy_source, date_range):
     # Extract start and end dates from the date range widget
-    start_date, end_date = date_range
+    starting_date, ending_date = date_range
 
     # Convert the start and end dates to the 'YYYYMMDD' format
-    start_date = start_date.strftime('%Y%m%d')
-    end_date = end_date.strftime('%Y%m%d')
+    starting_date = starting_date.strftime('%Y%m%d')
+    ending_date = ending_date.strftime('%Y%m%d')
 
     # Fetch data using the API with the correctly formatted date range
-    df = request_ISO_genfuelmix_daterange(beg_date=start_date, end_date=end_date)
+    df = request_ISO_genfuelmix_daterange(beg_date=starting_date, end_date=ending_date)
 
     # Filter the data by the selected energy source
     filtered_df = df[df['FuelCategory'] == energy_source]
