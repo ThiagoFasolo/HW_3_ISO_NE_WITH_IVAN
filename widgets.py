@@ -5,7 +5,7 @@ import datetime
 exclude_energy_source_widget = pn.widgets.CheckBoxGroup(
     name='Exclude Energy Source',
     value=[],
-    options=['Solar', 'Wind', 'Hydro', 'Natural Gas', 'Renewable'],
+    options=['Solar', 'Wind', 'Hydro', 'Nat. Gas', 'Ren.'],
     inline=True
     )
 
@@ -15,7 +15,7 @@ date_range_widget = pn.widgets.DateRangePicker(
     name="Select Date Range",
     start=datetime.date(2024, 8, 1),  # Start date
     end=datetime.date.today(),  # Today's date
-    value=(datetime.date(2024, 10, 1), datetime.date.today(),)  # Default range
+    value=(datetime.date.today(), datetime.date.today())  # Default range
 )
 
 # Plot size adjustment sliders

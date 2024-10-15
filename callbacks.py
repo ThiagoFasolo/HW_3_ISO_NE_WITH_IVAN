@@ -16,7 +16,7 @@ def fetch_data(date_range):
 
 def get_energy_data(df, exclude_energy):
     # Filter the data by the selected energy source
-    options = list(set(['Solar', 'Wind', 'Hydro', 'Natural Gas', 'Renewable']) - set(exclude_energy))
+    options = list(set(['Solar', 'Wind', 'Hydro', 'Nat. Gas', 'Ren.']) - set(exclude_energy))
     filtered_df = df[df['FuelCategory'].isin(options)]
 
     # Return the filtered data as a Panel DataFrame component
@@ -32,8 +32,8 @@ def get_line_graph(df, category_type, exclude_categories, plot_width, plot_heigh
     # Return the Plotly figure wrapped in a Panel object for rendering
     return pn.pane.Plotly(fig)
 
-def get_sankey_diagram(df):
-    fig = create_energy_sankey(df)
+def get_sankey_diagram(df, plot_width, plot_height):
+    fig = create_energy_sankey(df, plot_width, plot_height)
     return pn.pane.Plotly(fig)
 
 

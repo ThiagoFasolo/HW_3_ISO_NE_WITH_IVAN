@@ -44,7 +44,7 @@ def _code_mapping(df, src, targ):
 
 
 # Modified make_sankey function to include the "Total Mw" level
-def make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col=None, **kwargs):
+def make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col=None, width=800, height=600, **kwargs):
     # Create Count column based on the provided values column
     if vals_col == 'Count':
         pass
@@ -84,6 +84,7 @@ def make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col=Non
     # Create Sankey diagram
     sk = go.Sankey(link=link, node=node)
     fig = go.Figure(sk)
+    fig.update_layout(width=width, height=height)
     return fig
 
 
