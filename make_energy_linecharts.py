@@ -9,6 +9,7 @@ def line_graph(df, category_type='FuelCategory', width = 500, height =800):
     - df: A DataFrame containing columns 'BeginDate', 'GenMw', and fuel category columns.
     - category_type: Choose either 'FuelCategory' or 'FuelCategoryRollup' for line distinction.
     """
+
     fig = px.line(df,
                   x='BeginDate',
                   y='GenMw',

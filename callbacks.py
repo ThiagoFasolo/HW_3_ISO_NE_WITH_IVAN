@@ -14,14 +14,19 @@ def fetch_data(date_range):
     # return pn.pane.Plotly(fig)
     return df
 
-def get_energy_data(df, energy_source):
+def get_energy_data(df, exclude_energy):
     # Filter the data by the selected energy source
-    filtered_df = df[df['FuelCategory'] == energy_source]
+    options = list(set(['Solar', 'Wind', 'Hydro', 'Natural Gas', 'Renewable']) - set(exclude_energy))
+    filtered_df = df[df['FuelCategory'].isin(options)]
 
     # Return the filtered data as a Panel DataFrame component
     return pn.pane.DataFrame(filtered_df, width=800)
 
-def get_line_graph(df, category_type, plot_width, plot_height):
+def get_line_graph(df, category_type, exclude_categories, plot_width, plot_height):
+
+    if exclude_categories:
+        df = df[~df[category_type].isin(exclude_categories)]
+
     # Generate the line plot
     fig = line_graph(df, category_type = category_type, width = plot_width, height = plot_height)
     # Return the Plotly figure wrapped in a Panel object for rendering

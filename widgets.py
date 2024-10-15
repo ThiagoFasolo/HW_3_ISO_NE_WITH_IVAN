@@ -1,19 +1,21 @@
 import panel as pn
 import datetime
 
-# Define the energy source widget
-energy_source_widget = pn.widgets.Select(
-    name="Energy Source",
-    options=['Solar', 'Wind', 'Hydro', 'Natural Gas'],
-    value='Solar'
-)
+# Define the exclude energy source widget
+exclude_energy_source_widget = pn.widgets.CheckBoxGroup(
+    name='Exclude Energy Source',
+    value=[],
+    options=['Solar', 'Wind', 'Hydro', 'Natural Gas', 'Renewable'],
+    inline=True
+    )
+
 
 # Date range widget for selecting a date range
 date_range_widget = pn.widgets.DateRangePicker(
     name="Select Date Range",
-    start=datetime.date(2024, 9, 1),  # Start date
+    start=datetime.date(2024, 8, 1),  # Start date
     end=datetime.date.today(),  # Today's date
-    value=(datetime.date(2024, 9, 1), datetime.date.today(),)  # Default range
+    value=(datetime.date(2024, 10, 1), datetime.date.today(),)  # Default range
 )
 
 # Plot size adjustment sliders
