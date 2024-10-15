@@ -5,8 +5,7 @@ import datetime
 exclude_energy_source_widget = pn.widgets.CheckBoxGroup(
     name='Exclude Energy Source',
     value=[],
-    options=['Solar', 'Wind', 'Hydro', 'Nat. Gas', 'Ren.'],
-    inline=True
+    options=['Solar', 'Wind', 'Hydro', 'Natural Gas', 'Nuclear', 'Landfill Gas', 'Refuse', 'Wood', 'Oil', 'Other']
     )
 
 

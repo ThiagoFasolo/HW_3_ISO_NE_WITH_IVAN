@@ -16,7 +16,7 @@ def fetch_data(date_range):
 
 def get_energy_data(df, exclude_energy):
     # Filter the data by the selected energy source
-    options = list(set(['Solar', 'Wind', 'Hydro', 'Nat. Gas', 'Ren.']) - set(exclude_energy))
+    options = list(set(['Solar', 'Wind', 'Hydro', 'Natural Gas', 'Nuclear', 'Landfill Gas', 'Refuse', 'Wood', 'Oil', 'Other']) - set(exclude_energy))
     filtered_df = df[df['FuelCategory'].isin(options)]
 
     # Return the filtered data as a Panel DataFrame component
