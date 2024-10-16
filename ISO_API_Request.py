@@ -27,8 +27,6 @@ def request_ISO(application = 'genfuelmix/current'):
     if response.status_code == 200:
         # Handle JSON response
         data = response.json()
-        # Unncomment to dump json
-        # print(json.dumps(data, indent=2))
         return data
     else:
         print('Failed to retrieve data:', response.status_code, f'from {url}')

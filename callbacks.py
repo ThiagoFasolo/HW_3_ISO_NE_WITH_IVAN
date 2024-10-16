@@ -1,7 +1,6 @@
 from ISO_API_Request import request_ISO_genfuelmix_daterange
 import panel as pn
-from make_energy_sankey import create_energy_sankey
-from make_energy_linecharts import line_graph
+from make_plots import create_energy_sankey, line_graph
 
 def fetch_data(date_range):
     # Convert the date range
@@ -11,7 +10,6 @@ def fetch_data(date_range):
 
     # Generate the Sankey diagram using the selected category type
     df = request_ISO_genfuelmix_daterange(beg_date=start_date, end_date=end_date)
-    # return pn.pane.Plotly(fig)
     return df
 
 def get_energy_data(df, exclude_energy):

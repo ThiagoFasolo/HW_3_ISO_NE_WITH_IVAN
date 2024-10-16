@@ -1,27 +1,33 @@
 import plotly.graph_objects as go
 import pandas as pd
-from pandas import json_normalize
 
 pd.set_option('future.no_silent_downcasting', True)
 
-
-# Merge and sum rows helper function
 def merge_and_sum_rows(df, col1, col2, col_sum):
+    '''
+    helper function for df_pairing
+    '''
     result = df.groupby([col1, col2])[col_sum].sum().reset_index()
     return result
 
-
-# Helper function to create unique pairs
 def make_pairs(lst):
+    '''
+    helper function for df_pairing
+    '''
     result = []
+    # create unique pairs without repetition
     for i in range(len(lst)):
         for j in range(i + 1, len(lst)):
             result.append([lst[i], lst[j]])
     return result
 
 
-# Create unique combinations of column pairs
-def df_pairing(df, columns=['FuelCategoryRollup', 'FuelCategory']):
+def df_pairing(df, columns=['Gender', 'Decade', 'Nationality']):
+    '''
+    Creates a list of dataframes
+    each is a unique combinations of column pairs from the input dataframe df
+    grouped and summed by a specified 'Count' column
+    '''
     df_pairs_list = []
     column_pairs = make_pairs(columns)
     for pairs in column_pairs:
@@ -32,19 +38,23 @@ def df_pairing(df, columns=['FuelCategoryRollup', 'FuelCategory']):
     return df_pairs_list
 
 
-# Mapping labels to integers
 def _code_mapping(df, src, targ):
+    """ Map labels in src and targ to integers """
+    # get distinct labels
     combined = pd.concat([df[src], df[targ]], axis=0)
     unique_values = pd.unique(combined)
     labels = sorted(unique_values, key=lambda x: (isinstance(x, str), x))
+
+    # get integer codes
     codes = list(range(len(labels)))
+    # create label to code mapping
     lc_map = dict(zip(labels, codes))
+    # substitute names for codes in the dataframe
     df = df.replace({src: lc_map, targ: lc_map})
+
     return df, labels
-
-
-# Modified make_sankey function to include the "Total Mw" level
-def make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col=None, width=800, height=600, **kwargs):
+def make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col=None, width=800, height=600,
+                            title="Energy Split Sankey by GenMw", **kwargs):
     # Create Count column based on the provided values column
     if vals_col == 'Count':
         pass
@@ -54,28 +64,12 @@ def make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col=Non
         values = [1] * len(df)
         df['Count'] = values
 
-    # Calculate the total Mw and add a "Total Generation" level
-    total_mw = df['GenMw'].sum()
-
-    # Add a new row for the "Total Generation" level
-    total_df = pd.DataFrame({
-        'Source': ['Total Generation'] * len(df),
-        'Target': df['FuelCategoryRollup'],
-        'Count': df['GenMw']
-    })
-
-    # Combine original dataframe with the total generation row
     df_pairs = df_pairing(df, columns=columns)
     df_concat = pd.concat(df_pairs, axis=0)
-    df_concat = pd.concat([df_concat, total_df], axis=0)
 
-    # Map labels to integer codes
     df, labels = _code_mapping(df_concat, 'Source', 'Target')
-
-    # Create Sankey diagram links
     link = {'source': df["Source"], 'target': df["Target"], 'value': df["Count"]}
 
-    # Set up node parameters
     thickness = kwargs.get("thickness", 50)
     pad = kwargs.get("pad", 50)
 
@@ -84,7 +78,7 @@ def make_sankey(df, columns=['FuelCategoryRollup', 'FuelCategory'], vals_col=Non
     # Create Sankey diagram
     sk = go.Sankey(link=link, node=node)
     fig = go.Figure(sk)
-    fig.update_layout(width=width, height=height)
+    fig.update_layout(width=width, height=height, title= title)
     return fig
 
 

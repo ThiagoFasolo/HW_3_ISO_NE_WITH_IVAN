@@ -8,7 +8,6 @@ exclude_energy_source_widget = pn.widgets.CheckBoxGroup(
     options=['Solar', 'Wind', 'Hydro', 'Natural Gas', 'Nuclear', 'Landfill Gas', 'Refuse', 'Wood', 'Oil', 'Other']
     )
 
-
 # Date range widget for selecting a date range
 date_range_widget = pn.widgets.DateRangePicker(
     name="Select Date Range",
@@ -20,7 +19,6 @@ date_range_widget = pn.widgets.DateRangePicker(
 # Plot size adjustment sliders
 width_slider = pn.widgets.IntSlider(name="Plot Width", start=300, end=2000, step=100, value=1200)
 height_slider = pn.widgets.IntSlider(name="Plot Height", start=300, end=1500, step=100, value=800)
-
 
 # New widget to select the category type for the line graph and Sankey diagram
 category_type_widget = pn.widgets.Select(
